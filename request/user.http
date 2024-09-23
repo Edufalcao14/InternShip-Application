@@ -1,0 +1,94 @@
+@baseUrl = http://localhost:3030
+@teacherToken = variable value
+@studentToken = variable value
+@EduardoToken = variable value
+
+### GET Recover all users
+GET {{baseUrl}}/users
+Content-Type: application/json
+Authorization: {{teacherToken}}
+
+### GET Recover a user by ID
+GET {{baseUrl}}/users/13
+Content-Type: application/json
+
+
+### PATCH Modify user's first Name (student)
+PATCH {{baseUrl}}/users/modifyUserField
+Content-Type: application/json
+Authorization: {{EduardoToken}}
+
+
+{
+  "firstName": "Téo",
+  "version": 1,
+  "role": "ETUDIANT"
+}
+### PATCH Modify user's Last Name (student)
+PATCH {{baseUrl}}/users/modifyUserField
+Content-Type: application/json
+Authorization: {{EduardoToken}}
+
+
+{
+  "lastName": "phile",
+  "version": 1,
+  "role": "ETUDIANT"
+}
+### PATCH Modify user's email (student)
+PATCH {{baseUrl}}/users/modifyUserField
+Content-Type: application/json
+Authorization: {{EduardoToken}}
+
+
+{
+  "email": "teo.phile@student.vinci.be",
+  "version": 1,
+  "role": "ETUDIANT"
+}
+### PATCH Modify user's Phone Number (student)
+PATCH {{baseUrl}}/users/modifyUserField
+Content-Type: application/json
+Authorization: {{EduardoToken}}
+
+
+{
+  "phoneNumber": "0128368078",
+  "version": 1,
+  "role": "ETUDIANT"
+}
+### PATCH Modify user's password (student)
+PATCH {{baseUrl}}/users/modifyPassword
+Authorization: {{studentToken}}
+Content-Type: application/json
+
+{
+  "currentPassword": "mdpuser.1",
+  "newPassword": "mdpuser.12",
+  "version": 1
+}
+
+### POST Login a student
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "eduardo.falcao@student.vinci.be",
+  "password": "azerty1"
+}
+> {%
+  client.global.set("EduardoToken", response.body.token);
+%}
+
+### POST Register a new user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "firstName": "Eduardo",
+  "lastName": "Falcao",
+  "phoneNumber": "0123456789",
+  "email": "eduardo.falcao@student.vinci.be",
+  "password": "azerty1",
+  "role": "ETUDIANT"
+}

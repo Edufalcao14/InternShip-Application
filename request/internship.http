@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3030
+@administrativeToken = variable value
+@studentToken = variable value
+@teacherToken = variable value
+
+
+### GET Recover one internship (student)
+GET {{baseUrl}}/internships/one
+Authorization: {{studentToken}}
+
+### GET Recover student's internship (teacher)
+GET {{baseUrl}}/internships/one?studentId=23
+Authorization: {{teacherToken}}
+
+### PATCH Modify internship's subject (student)
+PATCH {{baseUrl}}/internships/modifySubject
+Authorization: {{studentToken}}
+Content-Type: application/json
+
+{
+  "id": 3,
+  "subject": "Autre Sujet Incroyable",
+  "version": 1
+}
+
+### GET Count students with internships (teacher)
+GET {{baseUrl}}/internships/with?year=2023-2024
+Authorization: {{teacherToken}}
+
+### GET Count students without internships (teacher)
+GET {{baseUrl}}/internships/without?year=2023-2024
+Authorization: {{teacherToken}}
+
+### GET Count students with internships with incorrect year (teacher)
+GET {{baseUrl}}/internships/with?year=2023-2025
+Authorization: {{teacherToken}}
+
+### GET Count students without internships with incorrect year(teacher)
+GET {{baseUrl}}/internships/without?year=2023-2025
+Authorization: {{teacherToken}}

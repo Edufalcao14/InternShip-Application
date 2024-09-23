@@ -1,0 +1,59 @@
+@baseUrl = http://localhost:3030
+@administrativeToken = variable value
+@studentToken = variable value
+@teacherToken = variable value
+
+### GET Recover all companies (teacher)
+GET {{baseUrl}}/companies
+Authorization: {{teacherToken}}
+
+### GET Recover all companies order by is_blacklisted (teacher)
+GET {{baseUrl}}/companies?orderBy=phone_number
+Authorization: {{teacherToken}}
+
+### GET Recover all companies for academic year 2022-2023 (teacher)
+GET {{baseUrl}}/companies?academicYear=2022-2023
+Authorization: {{teacherToken}}
+
+### GET Recover all companies for academic year 2022-2023 order by name (desc) (teacher)
+GET {{baseUrl}}/companies?academicYear=2022-2023&?orderBy=-designation
+Authorization: {{teacherToken}}
+
+### GET Recover all companies (administrative)
+GET {{baseUrl}}/companies
+Authorization: {{administrativeToken}}
+
+### GET Recover one company by ID (student)
+GET {{baseUrl}}/companies/2
+Authorization: {{studentToken}}
+
+### GET Recover one company by ID (teacher)
+GET {{baseUrl}}/companies/2
+Authorization: {{teacherToken}}
+
+### GET Recover one company by ID (administrative)
+GET {{baseUrl}}/companies/2
+Authorization: {{administrativeToken}}
+
+### POST Blacklist a company (teacher)
+POST {{baseUrl}}/companies/7/blacklist
+Content-Type: application/json
+Authorization: {{teacherToken}}
+
+{
+  "blacklist_reason": "Cette entreprise exploite les étudiants.",
+  "version": 1
+}
+
+### POST Add a new company (student)
+POST {{baseUrl}}/companies
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "name": "CiDev Industries",
+  "designation": "Cidev Brussels",
+  "address": "Rue Vogler 78, 1030 Schaerbeek",
+  "email": "Cidev@gmail.com",
+  "phoneNumber": "0484536135"
+}

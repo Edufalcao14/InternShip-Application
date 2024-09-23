@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout disableAnsi="false"
+        pattern="[%d{dd/MM/yyyy HH:mm:ss.SSS}] %highlight{[%marker] %level:} %msg%n%ex"/>
+    </Console>
+    <RollingFile fileName="logs/application.log"
+      filePattern="logs/application-%i.log"
+      name="RollingFile">
+      <DefaultRolloverStrategy fileIndex="min" max="5"/>
+      <PatternLayout
+        pattern="[%d{dd/MM/yyyy HH:mm:ss.SSS}] [%marker] %level: %msg%n%ex"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="100KB"/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="trace">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFile"/>
+    </Root>
+  </Loggers>
+</Configuration>

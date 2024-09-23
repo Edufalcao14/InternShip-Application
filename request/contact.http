@@ -1,0 +1,84 @@
+@baseUrl = http://localhost:3030
+@administrativeToken = variable value
+@studentToken = variable value
+@teacherToken = variable value
+
+
+### GET Recover all contacts (teacher)
+GET {{baseUrl}}/contacts/all
+Content-Type: application/json
+Authorization: {{teacherToken}}
+
+### GET Recover all user's contacts (student)
+GET {{baseUrl}}/contacts/
+Authorization: {{studentToken}}
+
+
+### GET Recover all student's followed contacts (teacher)
+GET {{baseUrl}}/contacts?idUser=3
+Authorization: {{teacherToken}}
+
+### GET Recover all student's contacts (teacher)
+GET {{baseUrl}}/contacts?idUser=-3
+Authorization: {{teacherToken}}
+
+### GET Recover all student's followed contacts (administrative)
+GET {{baseUrl}}/contacts?idUser=3
+Authorization: {{administrativeToken}}
+
+### GET Recover all company's contacts (teacher)
+GET {{baseUrl}}/contacts/company?id=2
+Authorization: {{teacherToken}}
+
+### POST Add a contact (student)
+POST {{baseUrl}}/contacts
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "company": 1
+}
+
+### POST Deny a contact (student)
+POST {{baseUrl}}/contacts/8/deny
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "refusalReason": "Ma raison de refus incroyable.",
+  "version": 2
+}
+
+### POST Take contact (student)
+POST {{baseUrl}}/contacts/10/take
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "meetingPlace": "distanciel",
+  "version": 1
+}
+
+### POST Unfollow a contact (student)
+POST {{baseUrl}}/contacts/9/unfollow
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "version": 2
+}
+
+### POST Accept a contact and add an internship (student)
+POST {{baseUrl}}/contacts/8/accept
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "supervisorId": 4,
+  "signatureDate": "2023-10-10",
+  "subject": "Gestion des stocks dans une pharmacie.",
+  "version": 2
+}
+
+
+

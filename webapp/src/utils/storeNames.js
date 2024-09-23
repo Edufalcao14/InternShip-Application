@@ -1,0 +1,11 @@
+const TOKEN_STORE_NAME = 'token';
+const REMEMBER_ME_STORE_NAME = 'rememberMe';
+const USER_EMAIL_STORE_NAME = 'user_email';
+const USER_FIRSTNAME_STORE_NAME = 'user_first_name';
+
+export {
+  TOKEN_STORE_NAME,
+  REMEMBER_ME_STORE_NAME,
+  USER_EMAIL_STORE_NAME,
+  USER_FIRSTNAME_STORE_NAME
+}

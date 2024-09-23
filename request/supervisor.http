@@ -1,0 +1,47 @@
+@baseUrl = http://localhost:3030
+@administrativeToken = variable value
+@studentToken = variable value
+@teacherToken = variable value
+
+### GET Recover all supervisors (student)
+GET {{baseUrl}}/supervisors
+Authorization: {{studentToken}}
+
+### GET Recover all supervisors of a company (student)
+GET {{baseUrl}}/supervisors?companyId=1
+Authorization: {{studentToken}}
+
+### POST Add a supervisor (student)
+POST {{baseUrl}}/supervisors/2
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "firstName": "omaqdezfar",
+  "lastName": "kobua",
+  "phoneNumber": "0123456789"
+}
+
+### POST Add a supervisor with nonconforming email
+POST {{baseUrl}}/supervisors/1
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "firstName": "Alan",
+  "lastName": "Wake",
+  "phoneNumber": "0123456789",
+  "email": "alan.wake"
+}
+
+### POST Add a supervisor with nonconforming phone number
+POST {{baseUrl}}/supervisors/1
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+{
+  "firstName": "Alan",
+  "lastName": "Wake",
+  "phoneNumber": "zzz",
+  "email": "alan.wake@gmail.com"
+}

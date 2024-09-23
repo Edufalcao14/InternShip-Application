@@ -1,0 +1,134 @@
+@baseUrl = http://localhost:3030
+
+
+### POST Login a student
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "basile.ile@student.vinci.be",
+  "password": "mdpuser.1"
+}
+
+> {%
+  client.global.set("studentToken", response.body.token);
+%}
+
+### POST Login a teacher
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "raphael.baroni@vinci.be",
+  "password": "Prof24,z"
+}
+
+> {%
+  client.global.set("teacherToken", response.body.token);
+%}
+
+### POST Login an administrative
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "annouck.lancaster@vinci.be",
+  "password": "Admin;10."
+}
+
+> {%
+  client.global.set("administrativeToken", response.body.token);
+%}
+
+### POST Login with incorrect email
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "x@vinci.be",
+  "password": "azerty1"
+}
+
+### POST Login with the incorrect password
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "email": "laurent.leleux@vinci.be",
+  "password": "qwerty"
+}
+
+### GET Login with token
+GET {{baseUrl}}/auths
+Content-Type: application/json
+Authorization: {{studentToken}}
+
+### GET Login with incorrect token
+GET {{baseUrl}}/auths
+Content-Type: application/json
+Authorization: {{studentToken}}xxx
+
+### POST Register a new user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "firstName": "Tatiana",
+  "lastName": "Ananas",
+  "phoneNumber": "0123456789",
+  "email": "tatiana.ananas@student.vinci.be",
+  "password": "azerty1",
+  "role": "ETUDIANT"
+}
+
+### POST Register with nonconforming phone number
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "firstName": "Tatiana",
+  "lastName": "Ananas",
+  "phoneNumber": "012345678d",
+  "email": "tatiana.ananas@student.vinci.be",
+  "password": "azerty1",
+  "role": "ETUDIANT"
+}
+
+### POST Register with nonconforming password
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "firstName": "Tatiana",
+  "lastName": "Ananas",
+  "phoneNumber": "0123456789",
+  "email": "tatiana.ananas@student.vinci.be",
+  "password": "lol",
+  "role": "ETUDIANT"
+}
+
+### POST Register with nonconforming role
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "firstName": "Tatiana",
+  "lastName": "Ananas",
+  "phoneNumber": "0123456789",
+  "email": "tatiana.ananas@student.vinci.be",
+  "password": "azerty1",
+  "role": "ERROR MAKER"
+}
+
+### POST Register with forbidden role
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "firstName": "Tatiana",
+  "lastName": "Ananas",
+  "phoneNumber": "0123456789",
+  "email": "tatiana.ananas@student.vinci.be",
+  "password": "azerty1",
+  "role": "PROFESSEUR"
+}
